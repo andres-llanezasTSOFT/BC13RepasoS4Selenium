@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLOutput;
 import java.util.concurrent.TimeUnit;
 
@@ -69,12 +70,40 @@ btnIniciarSesion.click();
 
 
 
-Assertions.assertEquals("Inicia sesión en Spotify", driver.findElement(By.xpath("//h1[contains(text(), 'inicia sesi')]")).getText());
+Assertions.assertEquals(fixEncoding("Inicia sesión en Spotify"), driver.findElement(By.xpath("//h1[contains(text(), 'inicia sesi')]")).getText());
 
     }
+//EJERCICIO_________________________________________--
+    @Test
+    void registrarCuentaSpotify(){
+        driver.get("https://www.spotify.com/");
+        By locatorBtnRegistrarse = By.xpath("//button[contains(text(), 'Regis')]");
+        WebElement btnRegistrarse = driver.findElement(locatorBtnRegistrarse);
+        btnRegistrarse.click();
+
+        By locatorInputEmailRegistro = By.xpath("//input[@type='email']");
+        WebElement InputEmailRegistro = driver.findElement(locatorInputEmailRegistro);
+        InputEmailRegistro.sendKeys("hola@gmail.com");
+
+        By locatorPasswordRegistro = By.xpath("//input[@type='password']");
+        WebElement InputPasswordRegistro = driver.findElement(locatorPasswordRegistro);
+        InputPasswordRegistro.sendKeys("12345");
+
+
+
+        Assertions.assertEquals("Inicia sesión en Spotify", driver.findElement(By.xpath("//h1[contains(text(), 'inicia sesi')]")).getText());
+
+    }
+
+    //___________________________________________________
 
     @AfterEach
     void cerrarSesion(){
         driver.close();
+    }
+
+    public static String fixEncoding(String text){
+        byte[] utf8Bytes = text.getBytes(StandardCharsets.ISO_8859_1);
+        return new String(utf8Bytes, StandardCharsets.UTF_8);
     }
 }
