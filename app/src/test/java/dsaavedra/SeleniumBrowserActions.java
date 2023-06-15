@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumBrowserActions {
@@ -73,6 +74,13 @@ public class SeleniumBrowserActions {
 
         btnIniciarSesion.click();
 
-        Assertions.assertEquals("Inicia sesión en Spotify",driver.findElement(By.xpath("//h1[contains(text(),'Inicia sesi')]")).getText());
+        Assertions.assertEquals(fixEncoding("Inicia sesión en Spotify"),driver.findElement(By.xpath("//h1[contains(text(),'Inicia sesi')]")).getText());
     }
+
+    public static String fixEncoding(String text){
+        byte[]  utf8Bytes = text.getBytes(StandardCharsets.ISO_8859_1);
+        return new String(utf8Bytes,StandardCharsets.UTF_8);
+    }
+
+
 }
