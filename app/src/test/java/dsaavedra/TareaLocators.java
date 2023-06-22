@@ -89,8 +89,6 @@ public class TareaLocators {
         btnRegistrarse.click();
 
         Assertions.assertEquals("Descubrir Premium",driver.findElement(By.xpath("//span[contains(text(),'Descubrir Premium')]")).getText());
-
-
     }
 
     @Test
