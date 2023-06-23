@@ -1,4 +1,4 @@
-package dsaavedra;
+package dsaavedra.ejemplosS4;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
@@ -89,8 +89,6 @@ public class TareaLocators {
         btnRegistrarse.click();
 
         Assertions.assertEquals("Descubrir Premium",driver.findElement(By.xpath("//span[contains(text(),'Descubrir Premium')]")).getText());
-
-
     }
 
     @Test
@@ -108,7 +106,7 @@ public class TareaLocators {
         //Forma #3 (NAME)
         driver.findElement(By.name("password")).sendKeys("asdasdfasdf234234");
 
-        //driver.findElement(By.xpath("//input[@placeholder='Pon un nombre de perfil.']")).sendKeys("Pobre Domingo");
+        driver.findElement(By.xpath("//input[@placeholder='Pon un nombre de perfil.']")).sendKeys("Pobre Domingo");
 
         driver.findElement(By.id("day")).sendKeys("28");
 
